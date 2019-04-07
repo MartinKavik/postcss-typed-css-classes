@@ -1,0 +1,64 @@
+[
+    {
+        "name": "flex",
+        "properties": [
+            {
+                "property": "display: flex",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
+        "name": "md:hover:bg-blue",
+        "properties": [
+            {
+                "property": "background-color: #3490dc",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
+        "name": "-mx-6",
+        "properties": [
+            {
+                "property": "margin-left: -1.5rem",
+                "mediaQuery": null
+            },
+            {
+                "property": "margin-right: -1.5rem",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
+        "name": "static",
+        "properties": [
+            {
+                "property": "position: static",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
+        "name": "w-3/5",
+        "properties": [
+            {
+                "property": "width: 60%",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
+        "name": "container",
+        "properties": [
+            {
+                "property": "max-width: 576px",
+                "mediaQuery": "@media (min-width: 576px)"
+            },
+            {
+                "property": "max-width: 768px",
+                "mediaQuery": "@media (min-width: 768px)"
+            }
+        ]
+    }
+]
