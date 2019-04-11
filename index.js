@@ -35,12 +35,16 @@ module.exports = postcss.plugin('postcss-typed-css-classes', function (opts) {
 
   var outputFilepath = validateAndReturnOutputFilepath(opts.output_filepath)
   var generator = validateAndReturnGenerator(opts.generator)
+  var filter = validateAndReturnFilter(opts.filter)
 
   return function (root) {
-    var parsedClasses = getParsedClasses(root)
+    var parsedClasses = getAndFilterParsedClasses(root, filter)
     var aggregatedParsedClasses = aggregateParsedClasses(parsedClasses)
     var generatedCode = generator(aggregatedParsedClasses)
-    fs.writeFileSync(outputFilepath, generatedCode)
+
+    if (typeof generatedCode === 'string') {
+      fs.writeFileSync(outputFilepath, generatedCode)
+    }
   }
 })
 // ------------------ //MAIN ------------------------
@@ -53,7 +57,6 @@ module.exports = postcss.plugin('postcss-typed-css-classes', function (opts) {
  * @param {string} optsOutputFilepath output_filepath from options
  * @return {string} outputFilePath
  */
-
 function validateAndReturnOutputFilepath (optsOutputFilepath) {
   if (!optsOutputFilepath) {
     throw new Error(ERROR_PREFIX + 'You have to set opts.output_filepath!')
@@ -62,6 +65,10 @@ function validateAndReturnOutputFilepath (optsOutputFilepath) {
 }
 
 /** User has to set output_filepath in opts
+ *
+ * generator example: `"rust"`
+ * generator example 2: `function() {}`
+ * generator example 3: ``(classes) => `Classes: ${classes.length}``
  *
  * @param {string | function} optsGenerator generator from options
  * @returns {function} generator
@@ -81,9 +88,31 @@ function validateAndReturnGenerator (optsGenerator) {
     )
   }
 }
+
+/** User has to set filter in opts
+ *
+ * filter example: `function() { return true }`
+ * filter example 2: `(class_) => class_ !== "not_this_class"`
+ *
+ * @param {function} filter filter function
+ * @return {bool} include class in output
+ */
+function validateAndReturnFilter (filter) {
+  if (!filter) {
+    throw new Error(ERROR_PREFIX + 'You have to set opts.filter!')
+  }
+  if (typeof filter === 'function') {
+    return filter
+  } else {
+    throw new Error(
+      ERROR_PREFIX + 'opts.filter has to be function!'
+    )
+  }
+}
 // ------------------- //VALIDATORS ----------------------
 
 /** Get classes and their metadata from css file, start from PostCSS root
+ * And filter css classes (it mutates input (resp. output) css)
  *
  * Example
  * Input:
@@ -106,12 +135,21 @@ function validateAndReturnGenerator (optsGenerator) {
     }
  *
  * @param {postcss.Root} root css root
+ * @param {function} filter filter function
  * @returns {array} parsedClasses
  */
-function getParsedClasses (root) {
+function getAndFilterParsedClasses (root, filter) {
   var parsedClasses = []
   root.walkRules(function (rule) {
-    Array.prototype.push.apply(parsedClasses, getParsedClassesFromRule(rule))
+    var parsedClassesFromRule = getParsedClassesFromRule(rule)
+    Array.prototype.push.apply(parsedClasses, parsedClassesFromRule)
+
+    // filter classes for css output
+    parsedClassesFromRule.forEach(function (class_) {
+      if (!filter(class_.name)) {
+        rule.remove()
+      }
+    })
   })
   return parsedClasses
 }

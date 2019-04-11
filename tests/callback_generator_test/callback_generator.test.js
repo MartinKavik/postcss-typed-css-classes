@@ -17,7 +17,8 @@ it('generate ' + GENERATOR_NAME.toUpperCase(), function () {
     output_filepath: path.resolve(
       __dirname, GENERATOR_NAME + '_generator.basic.generated_output'
     ),
-    generator: callbackGenerator
+    generator: callbackGenerator,
+    filter: function () { return true }
   }
 
   var inputCss = fs.readFileSync(
@@ -30,12 +31,12 @@ it('generate ' + GENERATOR_NAME.toUpperCase(), function () {
       // WHAT
       var generatedCode = fs.readFileSync(
         path.resolve(
-          __dirname, './' + GENERATOR_NAME + '_generator.basic.generated_output'
+          __dirname, GENERATOR_NAME + '_generator.basic.generated_output'
         ), 'utf8'
       )
       var expectedCode = fs.readFileSync(
         path.resolve(
-          __dirname, './' + GENERATOR_NAME + '_generator.basic.expected_output'
+          __dirname, GENERATOR_NAME + '_generator.basic.expected_output'
         ), 'utf8'
       )
       expect(eol.auto(generatedCode)).toEqual(eol.auto(expectedCode))

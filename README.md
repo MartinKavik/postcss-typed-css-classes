@@ -12,7 +12,10 @@
 postcss([
   require("postcss-typed-css-classes")({
     output_filepath: path.resolve(__dirname, "css_classes.rs"),
-    generator: "rust"
+    generator: "rust",
+    filter: function() {
+      return true;
+    }
   })
 ]);
 ```
@@ -22,5 +25,3 @@ See [PostCSS] docs for examples for your environment.
 @TODO:
 
 - better readme
-- more comments
-- refactor?
