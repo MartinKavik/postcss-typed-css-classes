@@ -25,7 +25,8 @@ module.exports = {
 
 // - pretty-print JSON with 4 spaces indentation
 // - with a new line at the end of a file
-// - see example code in file `json_generator.basic.expected_output`
+// - see EXAMPLE CODE:
+//     `/tests/json_generator_test/json_generator.basic.expected_output`
 function generate (classes) {
   return JSON.stringify(classes, undefined, 4) + os.EOL
 }

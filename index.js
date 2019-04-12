@@ -43,6 +43,7 @@ module.exports = postcss.plugin('postcss-typed-css-classes', function (opts) {
     var generatedCode = generator(aggregatedParsedClasses)
 
     if (typeof generatedCode === 'string') {
+      // both **Sync are in this file because of simplicity in es5
       fs.writeFileSync(outputFilepath, generatedCode)
     }
   }

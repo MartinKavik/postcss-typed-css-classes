@@ -25,7 +25,8 @@ module.exports = {
 
 // - create Rust struct definition and one its instance
 // - fields are &str
-// - see example code in file `rust_generator.basic.expected_output`
+// - see EXAMPLE CODE:
+//     `/tests/rust_generator_test/rust_generator.basic.expected_output`
 function generate (classes) {
   classes = addEscapedNames(classes)
   return os.EOL +
