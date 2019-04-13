@@ -32,7 +32,9 @@ _Do you use it? Create PR!_
 
 ## Install
 
-@TODO
+```sh
+yarn add postcss-typed-css-classes --dev
+```
 
 ## Basic Usage
 
@@ -99,6 +101,66 @@ See [PostCSS] docs for examples for your environment.
     - `function() { return true }`
     - `(class_) => class_ !== "not-this-class"`
 
-## Contributing / Add A New Generator
+## Contributing - How To Add A New Built-In Generator
 
-@TODO
+> NOTE:
+> Plugin is based on official [postcss-plugin-boilerplate](https://github.com/postcss/postcss-plugin-boilerplate).
+> So it uses old JS and very strict linter, but I think that code is clean enough and commented => it shouldn't be problem for a small project like this and we don't have to solve problems with building pipelines.
+
+1. Fork this repo
+1. Run `yarn` in project root
+1. Run `yarn test` - all tests should pass
+1. Choose a name for a generator - we'll use `csharp` for this guide
+1. Duplicate file `/generators/json_generator.js` and rename it to `csharp_generator.js`
+1. Open `csharp_generator.js` and change:
+
+```js
+// - pretty-print JSON with 4 spaces indentation
+// - with a new line at the end of a file
+// - see EXAMPLE CODE:
+//     `/tests/json_generator_test/json_generator.basic.expected_output`
+function generate(classes) {
+  return JSON.stringify(classes, undefined, 4) + os.EOL;
+}
+```
+
+to
+
+```js
+// - generate C# class
+// - see EXAMPLE CODE:
+//     `/tests/csharp_generator_test/csharp_generator.basic.expected_output`
+function generate(classes) {
+  return "..imagine that I'm a c# class.." + os.EOL;
+}
+```
+
+7. Open `/index.js`
+1. Insert line
+
+```js
+var csharpGeneratorModule = require("./generators/charp_generator");
+```
+
+below the line
+
+```js
+var jsonGeneratorModule = require("./generators/json_generator");
+```
+
+9. Insert case
+
+```js
+case 'csharp':
+    return csharpGeneratorModule.generate
+```
+
+into function `getDefaultGenerator`
+
+10. Duplicate folder `/tests/json_generator_test` and rename it to `csharp_generator_test`
+1. Rename `/tests/csharp_generator_test/json_generator.basic.expected_output` to `csharp_generator.basic.expected_output`
+1. Change content of `csharp_generator.basic.expected_output` to `..imagine that I'm a c# class..` and add a new line if your IDE don't do that on save
+1. Rename `/tests/csharp_generator_test/json_generator.test.js` to `csharp_generator.test.js`
+1. Open `csharp_generator.test.js` and change `GENERATOR_NAME` from `json` to `csharp`
+1. Run `yarn test` in the project root
+1. Create pull request to this repo (squash commits and rebase if necessary)
