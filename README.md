@@ -109,47 +109,51 @@ See [PostCSS] docs for examples for your environment.
 
 1. Fork this repo
 1. Run `yarn` in project root
-1. Run `yarn test` - all tests should pass
 1. Choose a name for a generator - we'll use `csharp` for this guide
 1. Duplicate file `/generators/json_generator.js` and rename it to `csharp_generator.js`
 1. Open `csharp_generator.js` and change:
 
+<!-- prettier-ignore -->
 ```js
 // - pretty-print JSON with 4 spaces indentation
 // - with a new line at the end of a file
 // - see EXAMPLE CODE:
 //     `/tests/json_generator_test/json_generator.basic.expected_output`
-function generate(classes) {
-  return JSON.stringify(classes, undefined, 4) + os.EOL;
+function generate (classes) {
+  return JSON.stringify(classes, undefined, 4) + os.EOL
 }
 ```
 
 to
 
+<!-- prettier-ignore -->
 ```js
 // - generate C# class
 // - see EXAMPLE CODE:
 //     `/tests/csharp_generator_test/csharp_generator.basic.expected_output`
-function generate(classes) {
-  return "..imagine that I'm a c# class.." + os.EOL;
+function generate (classes) {
+  return "..I'm a c# class with " + classes.length + ' fields..' + os.EOL
 }
 ```
 
 7. Open `/index.js`
 1. Insert line
 
+<!-- prettier-ignore -->
 ```js
-var csharpGeneratorModule = require("./generators/charp_generator");
+var csharpGeneratorModule = require('./generators/csharp_generator')
 ```
 
 below the line
 
+<!-- prettier-ignore -->
 ```js
-var jsonGeneratorModule = require("./generators/json_generator");
+var jsonGeneratorModule = require('./generators/json_generator')
 ```
 
 9. Insert case
 
+<!-- prettier-ignore -->
 ```js
 case 'csharp':
     return csharpGeneratorModule.generate
@@ -159,8 +163,19 @@ into function `getDefaultGenerator`
 
 10. Duplicate folder `/tests/json_generator_test` and rename it to `csharp_generator_test`
 1. Rename `/tests/csharp_generator_test/json_generator.basic.expected_output` to `csharp_generator.basic.expected_output`
-1. Change content of `csharp_generator.basic.expected_output` to `..imagine that I'm a c# class..` and add a new line if your IDE don't do that on save
-1. Rename `/tests/csharp_generator_test/json_generator.test.js` to `csharp_generator.test.js`
+1. Change content of `csharp_generator.basic.expected_output` to
+   <!-- prettier-ignore -->
+
+```
+..I'm a c# class with 6 fields..
+
+```
+
+(new line at the end is necessary)
+
+13. Rename `/tests/csharp_generator_test/json_generator.test.js` to `csharp_generator.test.js`
 1. Open `csharp_generator.test.js` and change `GENERATOR_NAME` from `json` to `csharp`
 1. Run `yarn test` in the project root
+1. Update [README.md](/README.md) if necessary
+1. Update [CHANGELOG.md](CHANGELOG.md)
 1. Create pull request to this repo (squash commits and rebase if necessary)
