@@ -4,7 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.1.1]
+
 - Fixed guide for adding generator in README.md
+- Don't save generated code if there are no changes
 
 [0.1.0]
 
