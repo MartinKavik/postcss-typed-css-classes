@@ -37,7 +37,7 @@ pub struct CssClasses<'a> {
     pub container: &'a str,
 }
 
-pub const C: CssClasses<'static> = CssClasses {
+pub static C: CssClasses = CssClasses {
 
     /**
         display: flex;
