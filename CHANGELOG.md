@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.1.3]
+
+- Updated dependencies, Node 6 not supported (breaking)
+
 [0.1.2]
 
 - Rust generator - generate `static` instead of `const`, `'static` removed
