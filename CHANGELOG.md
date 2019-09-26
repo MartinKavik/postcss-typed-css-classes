@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.1.4]
+
+- Updated dependencies
+- Rust generator - remove lifetime if there are no classes
+- Added RELEASE_CHECKLIST.md
+
 [0.1.3]
 
 - Updated dependencies, Node 6 not supported (breaking)
