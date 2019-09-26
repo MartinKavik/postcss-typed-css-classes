@@ -86,8 +86,9 @@ function generateAttributes () {
 }
 
 function generateStructDefinition (classes) {
+  var lifetime = classes.length ? "<'a>" : ''
   return (
-    "pub struct CssClasses<'a> {" +
+    'pub struct CssClasses' + lifetime + ' {' +
     os.EOL +
     classes.map(generateStructDefinitionItem).join('') +
     '}'
