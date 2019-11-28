@@ -1,4 +1,4 @@
-# PostCSS Typed Css Classes [![Build Status][ci-img]][ci][![npm version](https://badge.fury.io/js/postcss-typed-css-classes.svg)](https://badge.fury.io/js/postcss-typed-css-classes)
+# PostCSS Typed Css Classes [![npm version](https://badge.fury.io/js/postcss-typed-css-classes.svg)](https://badge.fury.io/js/postcss-typed-css-classes)
 
 [PostCSS] plugin that **generates** typed entities from CSS classes for chosen programming language.
 You can also use it to **filter** CSS classes to reduce output size for faster application launch.
