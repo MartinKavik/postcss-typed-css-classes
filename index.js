@@ -1,11 +1,11 @@
-var postcss = require('postcss')
-var fs = require('fs')
-var selectorParser = require('postcss-selector-parser')
+let postcss = require('postcss')
+let fs = require('fs')
+let selectorParser = require('postcss-selector-parser')
 
 // --------------- GENERATORS ------------------
 // can't lazyload because of preconfigured linters from PostCSS plugin template
-var rustGeneratorModule = require('./generators/rust_generator')
-var jsonGeneratorModule = require('./generators/json_generator')
+let rustGeneratorModule = require('./generators/rust_generator')
+let jsonGeneratorModule = require('./generators/json_generator')
 
 /** Exchange generator name from plugin opts for generator instance
  *
@@ -28,24 +28,24 @@ function getDefaultGenerator (generatorName) {
 // --------------- //GENERATORS ------------------
 
 // ------------------- MAIN ----------------------
-var ERROR_PREFIX = 'POSTCSS_TYPED_CSS_CLASSES: '
+const ERROR_PREFIX = 'POSTCSS_TYPED_CSS_CLASSES: '
 
-module.exports = postcss.plugin('postcss-typed-css-classes', function (opts) {
+module.exports = postcss.plugin('postcss-typed-css-classes', opts => {
   opts = opts || {}
 
-  var outputFilepath = validateAndReturnOutputFilepath(opts.output_filepath)
-  var generator = validateAndReturnGenerator(opts.generator)
-  var filter = validateAndReturnFilter(opts.filter)
+  let outputFilepath = validateAndReturnOutputFilepath(opts.output_filepath)
+  let generator = validateAndReturnGenerator(opts.generator)
+  let filter = validateAndReturnFilter(opts.filter)
 
   return function (root) {
-    var parsedClasses = getAndFilterParsedClasses(root, filter)
-    var aggregatedParsedClasses = aggregateParsedClasses(parsedClasses)
-    var generatedCode = generator(aggregatedParsedClasses)
+    let parsedClasses = getAndFilterParsedClasses(root, filter)
+    let aggregatedParsedClasses = aggregateParsedClasses(parsedClasses)
+    let generatedCode = generator(aggregatedParsedClasses)
 
     if (typeof generatedCode === 'string') {
       // NOTE: there are *Sync functions because of simplicity in es5
       if (fs.existsSync(outputFilepath)) {
-        var oldGeneratedCode = fs.readFileSync(outputFilepath, 'utf8')
+        let oldGeneratedCode = fs.readFileSync(outputFilepath, 'utf8')
         if (oldGeneratedCode === generatedCode) {
           return
         }
@@ -146,13 +146,13 @@ function validateAndReturnFilter (filter) {
  * @returns {array} parsedClasses
  */
 function getAndFilterParsedClasses (root, filter) {
-  var parsedClasses = []
-  root.walkRules(function (rule) {
-    var parsedClassesFromRule = getParsedClassesFromRule(rule)
+  let parsedClasses = []
+  root.walkRules(rule => {
+    let parsedClassesFromRule = getParsedClassesFromRule(rule)
     Array.prototype.push.apply(parsedClasses, parsedClassesFromRule)
 
     // filter classes for css output
-    parsedClassesFromRule.forEach(function (class_) {
+    parsedClassesFromRule.forEach(class_ => {
       if (!filter(class_.name)) {
         rule.remove()
       }
@@ -205,9 +205,9 @@ function getAndFilterParsedClasses (root, filter) {
  * @returns {array} aggregatedParsedClasses
  */
 function aggregateParsedClasses (parsedClasses) {
-  var aggregatedParsedClasses = []
-  parsedClasses.forEach(function (parsedClass) {
-    var index = findAggregatedParsedClassIndex(
+  let aggregatedParsedClasses = []
+  parsedClasses.forEach(parsedClass => {
+    let index = findAggregatedParsedClassIndex(
       aggregatedParsedClasses,
       parsedClass.name
     )
@@ -235,8 +235,8 @@ function aggregateParsedClasses (parsedClasses) {
 function findAggregatedParsedClassIndex (
   aggregatedParsedClasses, parsedClassName
 ) {
-  for (var i = 0; i < aggregatedParsedClasses.length; i++) {
-    if (aggregatedParsedClasses[i].name === parsedClassName) {
+  for (let [i, element] of aggregatedParsedClasses.entries()) {
+    if (element.name === parsedClassName) {
       return i
     }
   }
@@ -249,17 +249,17 @@ function findAggregatedParsedClassIndex (
  * @returns {array} parsedClasses
  */
 function getParsedClassesFromRule (rule) {
-  var classNames = getClassNamesFromRule(rule)
-  var properties = getPropertiesFromRule(rule)
-  var mediaQuery = getMediaQueryFromRule(rule)
+  let classNames = getClassNamesFromRule(rule)
+  let properties = getPropertiesFromRule(rule)
+  let mediaQuery = getMediaQueryFromRule(rule)
 
-  var parsedClasses = classNames.map(function (className) {
+  let parsedClasses = classNames.map(className => {
     return {
       name: className,
-      properties: properties.map(function (property) {
+      properties: properties.map(property => {
         return {
-          property: property,
-          mediaQuery: mediaQuery
+          property,
+          mediaQuery
         }
       })
     }
@@ -286,9 +286,9 @@ function getMediaQueryFromRule (rule) {
  * @returns {array} rule properties
  */
 function getPropertiesFromRule (rule) {
-  var properties = []
+  let properties = []
 
-  rule.walkDecls(function (declaration) {
+  rule.walkDecls(declaration => {
     properties.push(declaration.toString())
   })
   return properties
@@ -300,10 +300,10 @@ function getPropertiesFromRule (rule) {
  * @returns {array} class names
  */
 function getClassNamesFromRule (rule) {
-  var classNames = []
+  let classNames = []
 
-  selectorParser(function (selectors) {
-    selectors.walkClasses(function (classNode) {
+  selectorParser(selectors => {
+    selectors.walkClasses(classNode => {
       classNames.push(classNode.value)
     })
   }).processSync(rule)

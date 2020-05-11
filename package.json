@@ -12,7 +12,9 @@
     "classes"
   ],
   "scripts": {
-    "test": "jest && eslint *.js"
+    "test": "jest && eslint *.js",
+    "lint": "eslint *.js",
+    "lint:fix": "eslint *.js --fix"
   },
   "author": "Martin Kavík <martin@kavik.cz>",
   "license": "MIT",
