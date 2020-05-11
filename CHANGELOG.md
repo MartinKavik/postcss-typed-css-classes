@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.1.6]
+
 - Updated dependencies
 - Added scripts `lint` and `lint:fix`
 - Adapted to new PostCSS linters
