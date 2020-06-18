@@ -17,6 +17,9 @@
     "lint:fix": "eslint *.js --fix"
   },
   "author": "Martin Kavík <martin@kavik.cz>",
+  "contributors": [
+    "Frank Panetta <frank@zuudo.com.au>"
+  ],
   "license": "MIT",
   "repository": "MartinKavik/postcss-typed-css-classes",
   "bugs": {
