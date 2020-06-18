@@ -1,6 +1,6 @@
 {
   "name": "postcss-typed-css-classes",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "PostCSS plugin that generates typed entities from CSS classes for chosen programming language.",
   "keywords": [
     "postcss",

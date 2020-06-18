@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.1.7]
+
+- update rust_generator escapeClassName to include `@`
+
 [0.1.6]
 
 - Updated dependencies
