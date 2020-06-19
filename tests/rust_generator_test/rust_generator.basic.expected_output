@@ -35,6 +35,11 @@ pub struct CssClasses<'a> {
         max-width: 768px;    @media (min-width: 768px)
     */
     pub container: &'a str,
+
+    /**
+        width: 100%;    @media (min-width: 1600px)
+    */
+    pub uk_child_width_1_1_at_xl: &'a str,
 }
 
 pub static C: CssClasses = CssClasses {
@@ -70,4 +75,9 @@ pub static C: CssClasses = CssClasses {
         max-width: 768px;    @media (min-width: 768px)
     */
     container: "container",
+
+    /**
+        width: 100%;    @media (min-width: 1600px)
+    */
+    uk_child_width_1_1_at_xl: "uk-child-width-1-1@xl",
 };
