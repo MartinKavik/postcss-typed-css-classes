@@ -11,7 +11,10 @@ function filter (className) {
     case 'w-3/5':
     case 'md:hover:bg-blue':
     case 'uk-child-width-1-1@xl':
+    case 'fa':
       return false
+    case 'fas':
+      return true
     default:
       return true
   }

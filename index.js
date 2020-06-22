@@ -21,7 +21,7 @@ function getDefaultGenerator (generatorName) {
       return jsonGeneratorModule.generate
     default:
       throw new Error(ERROR_PREFIX +
-          'default generator ' + generatorName + ' doesn\'t exist!'
+        'default generator ' + generatorName + ' doesn\'t exist!'
       )
   }
 }
@@ -154,7 +154,15 @@ function getAndFilterParsedClasses (root, filter) {
     // filter classes for css output
     parsedClassesFromRule.forEach(class_ => {
       if (!filter(class_.name)) {
-        rule.remove()
+        if (rule.selectors.length < 2) {
+          rule.remove()
+        } else {
+          // just remove the class selector
+          let regex = RegExp(`\\b${ class_.name }\\b`)
+          rule.selector = rule.selectors
+            .filter(selector => !regex.test(selector))
+            .join(',')
+        }
       }
     })
   })
