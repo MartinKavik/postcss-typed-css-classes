@@ -69,5 +69,31 @@
                 "mediaQuery": "@media (min-width: 1600px)"
             }
         ]
+    },
+    {
+        "name": "fa",
+        "properties": [
+            {
+                "property": "font-family: 'Font Awesome 5 Free'",
+                "mediaQuery": null
+            },
+            {
+                "property": "font-weight: 900",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
+        "name": "fas",
+        "properties": [
+            {
+                "property": "font-family: 'Font Awesome 5 Free'",
+                "mediaQuery": null
+            },
+            {
+                "property": "font-weight: 900",
+                "mediaQuery": null
+            }
+        ]
     }
 ]

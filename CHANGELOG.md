@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.1.8]
+
+- Fix Bug: Valid classes excluded - [ref: Issue #9](https://github.com/MartinKavik/postcss-typed-css-classes/issues/9)
+
 [0.1.7]
 
 - update rust_generator escapeClassName to include `@`
