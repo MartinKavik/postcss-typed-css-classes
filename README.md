@@ -41,12 +41,8 @@ yarn add postcss-typed-css-classes --dev
 ```js
 postcss([
   require("postcss-typed-css-classes")({
-    output_filepath: path.resolve(__dirname, "css_classes.rs"),
     generator: "rust",
-    filter: function() {
-      return true;
-    }
-  })
+  }),
 ]);
 ```
 
@@ -55,14 +51,6 @@ See [Seed Quickstart Webpack](https://github.com/MartinKavik/seed-quickstart-web
 See [PostCSS] docs for examples for your environment.
 
 ## Options
-
-- ### output_filepath
-
-  - a file path with filename and extension
-  - generated code will be saved into this location
-  - required
-  - examples:
-    - `path.resolve(__dirname, 'css_classes.rust')`
 
 - ### generator
 
@@ -94,9 +82,64 @@ See [PostCSS] docs for examples for your environment.
   ]
   ```
 
-- ### filter
+- ### output_filepath
+
+  - a file path with filename and extension
+  - generated code will be saved into this location
+  - optional if generator does not provider a default otherwise it is required
+  - examples:
+    - `path.resolve(__dirname, 'css_classes.rust')`
+
+- ### purge
+
+  - boolean to indicate that the output should be filtered
+  - optional
+  - default is false
+
+- ### content
+
+  - Can be a path string pointing to the location of the files to be processed or an array of config objects
+  - optional is the generator has not provided defaults and a filter has not been defined
+
+  ### _Options_
+
+  - ### path
+    - a string path or an array of globs
+    - optional if generator has specified a default otherwise required
+  - ### regex
+    - valid regex
+    - optional if generator has specified a default otherwise required
+  - ### mapper
+    - map function
+    - transform class output
+    - optional if generator has specified a default otherwise required
+  - ### escape
+    - boolean indicating that the output needs to be escaped to meet generator requirements
+    - optional
+    - default false
+
+    ```
+    require("postcss-typed-css-classes")({
+      generator: "rust",
+      purge: options.mode === "production",
+      content: [
+        { path: ['src/**/*.rs'] },
+        {
+          path: ['static/index.hbs', 'static/templates/**/*.hbs'],
+          regex: /class\s*=\s*['|"][^'|"]+['|"]/g,
+          mapper: className => {
+            return (className.match(/class\s*=\s*['|"]([^'|"]+)['|"]/)[1]).match(/\S+/g)
+          },
+          escape: true
+        }
+      ],
+    })
+    ```
+
+* ### filter
   - a function with one parameter `class_` that will be called when a CSS class is found in your stylesheet
-  - required
+  - optional
+  - If a filter function is defined, it takes precedence of any of the content opts that may have been set
   - examples:
     - `function() { return true }`
     - `(class_) => class_ !== "not-this-class"`

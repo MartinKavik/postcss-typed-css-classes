@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.2.0]
+
+- add logic to getAndFilterParsedClasses to remove rule immediately when no more selectors
+- some more stuff
+
 [0.1.8]
 
 - Fix Bug: Valid classes excluded - [ref: Issue #9](https://github.com/MartinKavik/postcss-typed-css-classes/issues/9)
