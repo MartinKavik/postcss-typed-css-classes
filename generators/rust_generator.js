@@ -1,7 +1,7 @@
 var os = require('os')
 
 const defaults = {
-  output_filepath: "src/generated/css_classes.rs",
+  output_filepath: "src/css_classes.rs",
   content: [{
     path: ['src/**/*'],
     regex: /C\.[a-z0-9_]+/g,
