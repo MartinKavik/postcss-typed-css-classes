@@ -1,8 +1,9 @@
-var fs = require('fs')
-var path = require('path')
-var plugin = require('../..')
-var postcss = require('postcss')
-var eol = require('eol')
+let fs = require('fs')
+let path = require('path')
+let postcss = require('postcss')
+let eol = require('eol')
+
+let plugin = require('../..')
 
 function filter (className) {
   switch (className) {
@@ -20,37 +21,35 @@ function filter (className) {
   }
 }
 
-it('filter classes and don\'t emit output file', function () {
+it('filter classes and don\'t emit output file', async () => {
   // GIVEN
-  var opts = {
+  let opts = {
     output_filepath: path.resolve(
       __dirname, 'dummy.basic.generated_output'
     ),
-    generator: function () { },
-    filter: filter
+    generator: () => { },
+    filter
   }
 
-  var inputCss = fs.readFileSync(
+  let inputCss = fs.readFileSync(
     path.resolve(__dirname, '../input_data/basic_input_data.css'), 'utf8'
   )
 
   // WHEN
-  return postcss([plugin(opts)])
-    .process(inputCss, { from: undefined }).then(function (result) {
-      // WHAT
-      var outputExists = fs.existsSync(
-        path.resolve(
-          __dirname, 'dummy.basic.generated_output'
-        )
-      )
-      expect(outputExists).toEqual(false)
-
-      var expectedCss = fs.readFileSync(
-        path.resolve(
-          __dirname, 'filter.basic.expected.css'
-        ), 'utf8'
-      )
-      expect(eol.auto(result.css)).toEqual(eol.auto(expectedCss))
-      expect(result.warnings()).toHaveLength(0)
-    })
+  let result1 = await postcss([plugin(opts)])
+    .process(inputCss, { from: undefined })
+  // WHAT
+  let outputExists = fs.existsSync(
+    path.resolve(
+      __dirname, 'dummy.basic.generated_output'
+    )
+  )
+  expect(outputExists).toEqual(false)
+  let expectedCss = fs.readFileSync(
+    path.resolve(
+      __dirname, 'filter.basic.expected.css'
+    ), 'utf8'
+  )
+  expect(eol.auto(result1.css)).toEqual(eol.auto(expectedCss))
+  expect(result1.warnings()).toHaveLength(0)
 })

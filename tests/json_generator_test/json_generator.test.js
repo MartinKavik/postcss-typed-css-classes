@@ -1,42 +1,41 @@
-var fs = require('fs')
-var path = require('path')
-var plugin = require('../..')
-var postcss = require('postcss')
-var eol = require('eol')
+let fs = require('fs')
+let path = require('path')
+let postcss = require('postcss')
+let eol = require('eol')
 
-var GENERATOR_NAME = 'json'
+let plugin = require('../..')
 
-it('generate ' + GENERATOR_NAME.toUpperCase(), function () {
+let GENERATOR_NAME = 'json'
+
+it('generate ' + GENERATOR_NAME.toUpperCase(), async () => {
   // GIVEN
-  var opts = {
+  let opts = {
     output_filepath: path.resolve(
       __dirname, GENERATOR_NAME + '_generator.basic.generated_output'
     ),
     generator: GENERATOR_NAME,
-    filter: function () { return true }
+    filter: () => { return true }
   }
 
-  var inputCss = fs.readFileSync(
+  let inputCss = fs.readFileSync(
     path.resolve(__dirname, '../input_data/basic_input_data.css'), 'utf8'
   )
 
   // WHEN
-  return postcss([plugin(opts)])
-    .process(inputCss, { from: undefined }).then(function (result) {
-      // WHAT
-      var generatedCode = fs.readFileSync(
-        path.resolve(
-          __dirname, GENERATOR_NAME + '_generator.basic.generated_output'
-        ), 'utf8'
-      )
-      var expectedCode = fs.readFileSync(
-        path.resolve(
-          __dirname, GENERATOR_NAME + '_generator.basic.expected_output'
-        ), 'utf8'
-      )
-      expect(eol.auto(generatedCode)).toEqual(eol.auto(expectedCode))
-
-      expect(result.css).toEqual(inputCss)
-      expect(result.warnings()).toHaveLength(0)
-    })
+  let result1 = await postcss([plugin(opts)])
+    .process(inputCss, { from: undefined })
+  // WHAT
+  let generatedCode = fs.readFileSync(
+    path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.basic.generated_output'
+    ), 'utf8'
+  )
+  let expectedCode = fs.readFileSync(
+    path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.basic.expected_output'
+    ), 'utf8'
+  )
+  expect(eol.auto(generatedCode)).toEqual(eol.auto(expectedCode))
+  expect(result1.css).toEqual(inputCss)
+  expect(result1.warnings()).toHaveLength(0)
 })
