@@ -344,6 +344,17 @@ function getAndFilterParsedClassesWithOpts (root, escapeClassName,
       })
     }
   })
+  // remove empty atRules
+  if (purge) {
+    root.walkAtRules(atRule => {
+      let { nodes, params } = atRule
+      if ((nodes && !nodes.length) ||
+        (!nodes && !params) || (!params && !nodes.length)) {
+        atRule.remove()
+      }
+    })
+  }
+
   return parsedClasses
 }
 
