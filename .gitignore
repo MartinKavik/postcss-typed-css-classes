@@ -2,3 +2,4 @@ node_modules/
 npm-debug.log
 yarn-error.log
 *.generated_output
+tests/rust_generator_test/src/css_classes.rs

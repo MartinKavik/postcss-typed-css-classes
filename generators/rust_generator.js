@@ -3,7 +3,7 @@ let os = require('os')
 const defaults = {
   output_filepath: 'src/css_classes.rs',
   content: [{
-    path: ['src/**/*'],
+    path: ['src/**/*.rs'],
     regex: /C\.[\d_a-z]+/g,
     mapper: class_ => class_.substring(2),
     escape: false
