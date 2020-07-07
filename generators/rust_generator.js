@@ -1,7 +1,19 @@
-var os = require('os')
+let os = require('os')
+
+const defaults = {
+  output_filepath: 'src/css_classes.rs',
+  content: [{
+    path: ['src/**/*.rs'],
+    regex: /C\.[\d_a-z]+/g,
+    mapper: class_ => class_.substring(2),
+    escape: false
+  }]
+}
 
 module.exports = {
-  generate: generate
+  generate,
+  escapeClassName,
+  defaults
 }
 
 /*
@@ -58,7 +70,7 @@ function generate (classes) {
     },
  */
 function addEscapedNames (classes) {
-  return classes.map(function (class_) {
+  return classes.map(class_ => {
     class_.escapedName = escapeClassName(class_.name)
     return class_
   })
@@ -70,7 +82,7 @@ function escapeClassName (name) {
   name = name.replace(/:/g, '__')
   name = name.replace(/\//g, 'of')
   name = name.replace(/@/g, '_at_')
-  if (getKeywords().indexOf(name) > -1) {
+  if (getKeywords().includes(name)) {
     name += '_'
   }
   return name
@@ -87,7 +99,7 @@ function generateAttributes () {
 }
 
 function generateStructDefinition (classes) {
-  var lifetime = classes.length ? "<'a>" : ''
+  let lifetime = classes.length ? "<'a>" : ''
   return (
     'pub struct CssClasses' + lifetime + ' {' +
     os.EOL +
@@ -139,11 +151,11 @@ function generateComment (class_) {
 }
 
 function generateCommentItem (classProperty) {
-  var mediaQuery = ''
+  let mediaQuery = ''
   if (classProperty.mediaQuery) {
     mediaQuery = '    ' + classProperty.mediaQuery
   }
-  var property = classProperty.property
+  let property = classProperty.property
   return '        ' + property + ';' + mediaQuery + os.EOL
 }
 

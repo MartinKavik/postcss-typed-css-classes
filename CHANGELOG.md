@@ -4,6 +4,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.2.0]
+
+- remove empty atRules when purging
+- updated rust generator with the following:
+  - set default for `output_filepath`
+  - added `purge` option
+  - added `content` option with the following options with defaults:
+    - `path`
+    - `regex`
+    - `mapper`
+    - `escape`
+
 [0.1.8]
 
 - Fix Bug: Valid classes excluded - [ref: Issue #9](https://github.com/MartinKavik/postcss-typed-css-classes/issues/9)

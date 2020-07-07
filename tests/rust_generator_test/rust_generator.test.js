@@ -1,79 +1,74 @@
-var fs = require('fs')
-var path = require('path')
+let fs = require('fs')
+let path = require('path')
+let postcss = require('postcss')
+let eol = require('eol')
 
-var plugin = require('../..')
+let plugin = require('../..')
 
-var postcss = require('postcss')
-var eol = require('eol')
+let GENERATOR_NAME = 'rust'
 
-var GENERATOR_NAME = 'rust'
-
-it('generate ' + GENERATOR_NAME.toUpperCase(), function () {
+it('generate ' + GENERATOR_NAME.toUpperCase(), async () => {
   // GIVEN
-  var opts = {
+  let opts = {
     output_filepath: path.resolve(
       __dirname, GENERATOR_NAME + '_generator.basic.generated_output'
     ),
     generator: GENERATOR_NAME,
-    filter: function () { return true }
+    filter: () => { return true }
   }
 
-  var inputCss = fs.readFileSync(
+  let inputCss = fs.readFileSync(
     path.resolve(__dirname, '../input_data/basic_input_data.css'), 'utf8'
   )
 
   // WHEN
-  return postcss([plugin(opts)])
-    .process(inputCss, { from: undefined }).then(function (result) {
-      // WHAT
-      var generatedCode = fs.readFileSync(
-        path.resolve(
-          __dirname, GENERATOR_NAME + '_generator.basic.generated_output'
-        ), 'utf8'
-      )
-      var expectedCode = fs.readFileSync(
-        path.resolve(
-          __dirname, GENERATOR_NAME + '_generator.basic.expected_output'
-        ), 'utf8'
-      )
-      expect(eol.auto(generatedCode)).toEqual(eol.auto(expectedCode))
-
-      expect(result.css).toEqual(inputCss)
-      expect(result.warnings()).toHaveLength(0)
-    })
+  let result1 = await postcss([plugin(opts)])
+    .process(inputCss, { from: undefined })
+  // WHAT
+  let generatedCode = fs.readFileSync(
+    path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.basic.generated_output'
+    ), 'utf8'
+  )
+  let expectedCode = fs.readFileSync(
+    path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.basic.expected_output'
+    ), 'utf8'
+  )
+  expect(eol.auto(generatedCode)).toEqual(eol.auto(expectedCode))
+  expect(result1.css).toEqual(inputCss)
+  expect(result1.warnings()).toHaveLength(0)
 })
 
-it('generate empty ' + GENERATOR_NAME.toUpperCase(), function () {
+it('generate empty ' + GENERATOR_NAME.toUpperCase(), async () => {
   // GIVEN
-  var opts = {
+  let opts = {
     output_filepath: path.resolve(
       __dirname, GENERATOR_NAME + '_generator.empty.generated_output'
     ),
     generator: GENERATOR_NAME,
-    filter: function () { return true }
+    filter: () => { return true }
   }
 
-  var inputCss = fs.readFileSync(
+  let inputCss = fs.readFileSync(
     path.resolve(__dirname, '../input_data/empty_input_data.css'), 'utf8'
   )
 
   // WHEN
-  return postcss([plugin(opts)])
-    .process(inputCss, { from: undefined }).then(function (result) {
-      // WHAT
-      var generatedCode = fs.readFileSync(
-        path.resolve(
-          __dirname, GENERATOR_NAME + '_generator.empty.generated_output'
-        ), 'utf8'
-      )
-      var expectedCode = fs.readFileSync(
-        path.resolve(
-          __dirname, GENERATOR_NAME + '_generator.empty.expected_output'
-        ), 'utf8'
-      )
-      expect(eol.auto(generatedCode)).toEqual(eol.auto(expectedCode))
-
-      expect(result.css).toEqual(inputCss)
-      expect(result.warnings()).toHaveLength(0)
-    })
+  let result1 = await postcss([plugin(opts)])
+    .process(inputCss, { from: undefined })
+  // WHAT
+  let generatedCode = fs.readFileSync(
+    path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.empty.generated_output'
+    ), 'utf8'
+  )
+  let expectedCode = fs.readFileSync(
+    path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.empty.expected_output'
+    ), 'utf8'
+  )
+  expect(eol.auto(generatedCode)).toEqual(eol.auto(expectedCode))
+  expect(result1.css).toEqual(inputCss)
+  expect(result1.warnings()).toHaveLength(0)
 })

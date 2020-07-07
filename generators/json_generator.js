@@ -1,7 +1,7 @@
-var os = require('os')
+let os = require('os')
 
 module.exports = {
-  generate: generate
+  generate
 }
 
 /*
