@@ -46,7 +46,7 @@ postcss([
 ]);
 ```
 
-See [Seed Quickstart Webpack](https://github.com/MartinKavik/seed-quickstart-webpack) for using with Webpack and TailwindCSS.
+See [Seed Quickstart Webpack](https://github.com/MartinKavik/seed-quickstart-webpack) for using with Webpack.
 
 See [PostCSS] docs for examples for your environment.
 
@@ -86,9 +86,9 @@ See [PostCSS] docs for examples for your environment.
 
   - a file path with filename and extension
   - generated code will be saved into this location
-  - optional if generator does not provider a default otherwise it is required
+  - optional if generator does not provide a default otherwise it is required
   - examples:
-    - `path.resolve(__dirname, 'css_classes.rust')`
+    - `path.resolve(__dirname, 'css_classes.rs')`
 
 - ### purge
 
@@ -99,9 +99,9 @@ See [PostCSS] docs for examples for your environment.
 - ### content
 
   - Can be a path string pointing to the location of the files to be processed or an array of config objects
-  - optional is the generator has not provided defaults and a filter has not been defined
+  - optional
 
-  ### _Options_
+  ### _content options_
 
   - ### path
     - a string path or an array of globs
@@ -111,35 +111,45 @@ See [PostCSS] docs for examples for your environment.
     - optional if generator has specified a default otherwise required
   - ### mapper
     - map function
-    - transform class output
+    - transforms class output
     - optional if generator has specified a default otherwise required
   - ### escape
     - boolean indicating that the output needs to be escaped to meet generator requirements
     - optional
     - default false
 
-    ```
-    require("postcss-typed-css-classes")({
-      generator: "rust",
-      purge: options.mode === "production",
-      content: [
-        { path: ['src/**/*.rs'] },
-        {
-          path: ['static/index.hbs', 'static/templates/**/*.hbs'],
-          regex: /class\s*=\s*['|"][^'|"]+['|"]/g,
-          mapper: className => {
-            return (className.match(/class\s*=\s*['|"]([^'|"]+)['|"]/)[1]).match(/\S+/g)
-          },
-          escape: true
-        }
-      ],
-    })
-    ```
+_examples_
+
+```
+  require("postcss-typed-css-classes")({
+    generator: "rust",
+    content: 'src/**/*.rs'
+  })
+```
+
+
+```
+  require("postcss-typed-css-classes")({
+    generator: "rust",
+    purge: options.mode === "production",
+    content: [
+      { path: ['src/**/*.rs'] },
+      {
+        path: ['static/index.hbs', 'static/templates/**/*.hbs'],
+        regex: /class\s*=\s*["'|][^"'|]+["'|]/g,
+        mapper: className => {
+          return (className.match(/class\s*=\s*["'|]([^"'|]+)["'|]/)[1]).match(/\S+/g)
+        },
+        escape: true
+      }
+    ],
+  })
+```
 
 * ### filter
   - a function with one parameter `class_` that will be called when a CSS class is found in your stylesheet
   - optional
-  - If a filter function is defined, it takes precedence of any of the content opts that may have been set
+  - If a filter function is defined, it takes precedence over any of the content opts that may have been set
   - examples:
     - `function() { return true }`
     - `(class_) => class_ !== "not-this-class"`
