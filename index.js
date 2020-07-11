@@ -327,18 +327,14 @@ function getAndFilterParsedClassesWithOpts (root, escapeClassName,
       // filter classes for css output
       parsedClassesFromRule.forEach(class_ => {
         if (!usedCssClasses.has(escapeClassName(class_.name))) {
-          if (rule.selectors.length < 2) {
+          // just remove the class selector
+          let regex = RegExp(`\\b${ class_.name }\\b`)
+          let selectors = rule.selectors
+            .filter(selector => !regex.test(selector))
+          if (selectors.length === 0) {
             rule.remove()
           } else {
-            // just remove the class selector
-            let regex = RegExp(`\\b${ class_.name }\\b`)
-            let selectors = rule.selectors
-              .filter(selector => !regex.test(selector))
-            if (selectors.length === 0) {
-              rule.remove()
-            } else {
-              rule.selector = selectors.join(',')
-            }
+            rule.selector = selectors.join(',')
           }
         }
       })

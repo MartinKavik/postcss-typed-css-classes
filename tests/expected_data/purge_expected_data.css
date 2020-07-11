@@ -1,3 +1,22 @@
+.md\:hover\:bg-blue:hover {
+  background-color: #3490dc;
+}
+
+.-mx-6 {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}
+
+.w-3\/5 {
+  width: 60%;
+}
+
+@media (min-width: 1600px) {
+  .uk-child-width-1-1\@xl > * {
+    width: 100%;
+  }
+}
+
 .fa,
 .fas {
   font-family: 'Font Awesome 5 Free';
