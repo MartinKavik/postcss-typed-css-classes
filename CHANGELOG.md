@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.2.2]
+
+- Remove comments from struct and dedup
+
 [0.2.1]
 
 - BugFix: Prevent Purge from removing valid selectors

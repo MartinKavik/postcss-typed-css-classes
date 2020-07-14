@@ -110,7 +110,6 @@ function generateStructDefinition (classes) {
 
 function generateStructDefinitionItem (class_) {
   return (
-    generateComment(class_) +
     '    pub ' +
     class_.escapedName +
     ": &'a str," +
@@ -144,7 +143,7 @@ function generateComment (class_) {
     os.EOL +
     '    /**' +
     os.EOL +
-    class_.properties.map(generateCommentItem).join('') +
+    [...new Set(class_.properties.map(generateCommentItem))].join('') +
     '    */' +
     os.EOL
   )

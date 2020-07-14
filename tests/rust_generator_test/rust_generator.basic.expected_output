@@ -3,54 +3,14 @@
 
 #[allow(non_snake_case, dead_code)]
 pub struct CssClasses<'a> {
-
-    /**
-        display: flex;
-    */
     pub flex: &'a str,
-
-    /**
-        background-color: #3490dc;
-    */
     pub md__hover__bg_blue: &'a str,
-
-    /**
-        margin-left: -1.5rem;
-        margin-right: -1.5rem;
-    */
     pub _mx_6: &'a str,
-
-    /**
-        position: static;
-    */
     pub static_: &'a str,
-
-    /**
-        width: 60%;
-    */
     pub w_3of5: &'a str,
-
-    /**
-        max-width: 576px;    @media (min-width: 576px)
-        max-width: 768px;    @media (min-width: 768px)
-    */
     pub container: &'a str,
-
-    /**
-        width: 100%;    @media (min-width: 1600px)
-    */
     pub uk_child_width_1_1_at_xl: &'a str,
-
-    /**
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-    */
     pub fa: &'a str,
-
-    /**
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-    */
     pub fas: &'a str,
 }
 
