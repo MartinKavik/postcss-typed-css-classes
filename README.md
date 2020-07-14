@@ -28,7 +28,7 @@ So this plugin is trying to solve these **problems**:
 _Do you use it? Create PR!_
 
 - Webpack template for Rust web-apps with TailwindCSS and Typescript
-  - https://github.com/MartinKavik/seed-quickstart-webpack
+  - https://github.com/seed-rs/seed-quickstart-webpack
 
 ## Install
 
