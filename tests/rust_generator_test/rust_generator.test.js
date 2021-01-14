@@ -72,3 +72,36 @@ it('generate empty ' + GENERATOR_NAME.toUpperCase(), async () => {
   expect(result1.css).toEqual(inputCss)
   expect(result1.warnings()).toHaveLength(0)
 })
+
+it('generate number ' + GENERATOR_NAME.toUpperCase(), async () => {
+  // GIVEN
+  let opts = {
+    output_filepath: path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.number.generated_output'
+    ),
+    generator: GENERATOR_NAME,
+    filter: () => { return true }
+  }
+
+  let inputCss = fs.readFileSync(
+    path.resolve(__dirname, '../input_data/number_input_data.css'), 'utf8'
+  )
+
+  // WHEN
+  let result1 = await postcss([plugin(opts)])
+    .process(inputCss, { from: undefined })
+  // WHAT
+  let generatedCode = fs.readFileSync(
+    path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.number.generated_output'
+    ), 'utf8'
+  )
+  let expectedCode = fs.readFileSync(
+    path.resolve(
+      __dirname, GENERATOR_NAME + '_generator.number.expected_output'
+    ), 'utf8'
+  )
+  expect(eol.auto(generatedCode)).toEqual(eol.auto(expectedCode))
+  expect(result1.css).toEqual(inputCss)
+  expect(result1.warnings()).toHaveLength(0)
+})
