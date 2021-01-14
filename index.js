@@ -6,6 +6,7 @@ const fg = require('fast-glob')
 // --------------- GENERATORS ------------------
 // can't lazyload because of preconfigured linters from PostCSS plugin template
 const rustGeneratorModule = require('./generators/rust_generator')
+const rustMacroGeneratorModule = require('./generators/rust_macro_generator')
 const jsonGeneratorModule = require('./generators/json_generator')
 
 /** Exchange generator name from plugin opts for generator instance
@@ -18,6 +19,8 @@ function getDefaultGeneratorModule (generatorName) {
   switch (generatorName) {
     case 'rust':
       return rustGeneratorModule
+    case 'rust_macro':
+      return rustMacroGeneratorModule
     case 'json':
       return jsonGeneratorModule
     default:

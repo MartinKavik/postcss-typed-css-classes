@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+- add rust_macro generator, an alternative to the existing rust generator
+- update rust_generator escapeClassName to support leading numbers and decimal points
+
 [0.2.2]
 
 - Remove comments from struct and dedup
