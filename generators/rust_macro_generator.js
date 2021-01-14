@@ -42,11 +42,11 @@ function generate (classes) {
 
 function generateMacroEntry (class_) {
     return (
-        '   ("' + class_.name + '") => {' +
+        '    ("' + class_.name + '") => {' +
         os.EOL +
-        '       "' + class_.name + '"' +
+        '        "' + class_.name + '"' +
         os.EOL + 
-        '   };' +
+        '    };' +
         os.EOL
     )
 }

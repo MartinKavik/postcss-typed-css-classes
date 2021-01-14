@@ -1,29 +1,29 @@
 macro_rules! TC {
-   ("flex") => {
-       "flex"
-   };
-   ("md:hover:bg-blue") => {
-       "md:hover:bg-blue"
-   };
-   ("-mx-6") => {
-       "-mx-6"
-   };
-   ("static") => {
-       "static"
-   };
-   ("w-3/5") => {
-       "w-3/5"
-   };
-   ("container") => {
-       "container"
-   };
-   ("uk-child-width-1-1@xl") => {
-       "uk-child-width-1-1@xl"
-   };
-   ("fa") => {
-       "fa"
-   };
-   ("fas") => {
-       "fas"
-   };
+    ("flex") => {
+        "flex"
+    };
+    ("md:hover:bg-blue") => {
+        "md:hover:bg-blue"
+    };
+    ("-mx-6") => {
+        "-mx-6"
+    };
+    ("static") => {
+        "static"
+    };
+    ("w-3/5") => {
+        "w-3/5"
+    };
+    ("container") => {
+        "container"
+    };
+    ("uk-child-width-1-1@xl") => {
+        "uk-child-width-1-1@xl"
+    };
+    ("fa") => {
+        "fa"
+    };
+    ("fas") => {
+        "fas"
+    };
 }
