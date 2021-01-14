@@ -1,4 +1,7 @@
 macro_rules! C {
+    ($class0:tt, $($class:tt),+) => {
+        [$class0, $(C!($class),)*]
+    };
     ("flex") => {
         "flex"
     };

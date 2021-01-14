@@ -30,14 +30,22 @@ module.exports = {
 
 // - create rust macro called TC
 // - see EXAMPLE CODE:
-//     `/tests/json_generator_test/json_generator.basic.expected_output`
+//     `/tests/rust_macro_generator_test/rust_macro_generator.basic.expected_output`
 function generate (classes) {
-    return (
-        'macro_rules! C {' +
-        os.EOL +
-        classes.map(generateMacroEntry).join('') +
-        '}'
-    )
+  return (
+      'macro_rules! C {' +
+      generateRepeatedEntry() +
+      classes.map(generateMacroEntry).join('') +
+      '}'
+  )
+}
+
+function generateRepeatedEntry() {
+return `
+    ($class0:tt, $($class:tt),+) => {
+        [$class0, $(C!($class),)*]
+    };
+`
 }
 
 function generateMacroEntry (class_) {
