@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+- add rust_macro generator, an alternative to the existing rust generator
+
 [0.2.2]
 
 - Remove comments from struct and dedup

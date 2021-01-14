@@ -33,7 +33,7 @@ module.exports = {
 //     `/tests/json_generator_test/json_generator.basic.expected_output`
 function generate (classes) {
     return (
-        'macro_rules! TC {' +
+        'macro_rules! C {' +
         os.EOL +
         classes.map(generateMacroEntry).join('') +
         '}'

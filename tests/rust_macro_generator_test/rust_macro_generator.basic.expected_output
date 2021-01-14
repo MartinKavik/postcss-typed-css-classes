@@ -1,4 +1,4 @@
-macro_rules! TC {
+macro_rules! C {
     ("flex") => {
         "flex"
     };
