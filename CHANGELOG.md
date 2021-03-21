@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.2.3]
+
+- Update escaping function to support Tailwind classes like `2xl:something` (`_2xl__something`) or `something-1.5` (`something_1_p_5`). PR #15
+
 [0.2.2]
 
 - Remove comments from struct and dedup
