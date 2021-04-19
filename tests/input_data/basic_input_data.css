@@ -1,3 +1,7 @@
+.unused {
+  color: #000000;
+}
+
 .flex {
   display: flex;
 }

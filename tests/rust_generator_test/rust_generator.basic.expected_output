@@ -3,6 +3,7 @@
 
 #[allow(non_snake_case, dead_code)]
 pub struct CssClasses<'a> {
+    pub unused: &'a str,
     pub flex: &'a str,
     pub md__hover__bg_blue: &'a str,
     pub _mx_6: &'a str,
@@ -15,6 +16,11 @@ pub struct CssClasses<'a> {
 }
 
 pub static C: CssClasses = CssClasses {
+
+    /**
+        color: #000000;
+    */
+    unused: "unused",
 
     /**
         display: flex;

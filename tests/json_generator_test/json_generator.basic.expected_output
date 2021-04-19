@@ -1,5 +1,14 @@
 [
     {
+        "name": "unused",
+        "properties": [
+            {
+                "property": "color: #000000",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
         "name": "flex",
         "properties": [
             {
