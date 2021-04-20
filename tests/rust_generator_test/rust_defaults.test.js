@@ -104,7 +104,6 @@ it(`generates ${ GENERATOR_NAME.toUpperCase() } file with options`,
   })
 
 it(`generates purged ${ GENERATOR_NAME.toUpperCase() } file with extended opt`,
-  // TODO: Not working!!!!
   async () => {
     // GIVEN
     let opts = {
