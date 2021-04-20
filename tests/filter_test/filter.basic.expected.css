@@ -1,3 +1,15 @@
+.space-y-0 > :not([hidden]) ~ :not([hidden]) {
+  margin-bottom: calc(0px * var(--tw-space-y-reverse));
+}
+
+.space-y-0\.5 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));
+}
+
+.focus-within\:bg-pink-500:focus-within {
+  background-color: rgba(236, 72, 153, var(--tw-bg-opacity));
+}
+
 .flex {
   display: flex;
 }

@@ -3,6 +3,9 @@
 
 #[allow(non_snake_case, dead_code)]
 pub struct CssClasses<'a> {
+    pub space_y_0: &'a str,
+    pub space_y_0_p_5: &'a str,
+    pub focus_within__bg_pink_500: &'a str,
     pub flex: &'a str,
     pub md__hover__bg_blue: &'a str,
     pub _mx_6: &'a str,
@@ -15,6 +18,21 @@ pub struct CssClasses<'a> {
 }
 
 pub static C: CssClasses = CssClasses {
+
+    /**
+        margin-bottom: calc(0px * var(--tw-space-y-reverse));
+    */
+    space_y_0: "space-y-0",
+
+    /**
+        margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));
+    */
+    space_y_0_p_5: "space-y-0.5",
+
+    /**
+        background-color: rgba(236, 72, 153, var(--tw-bg-opacity));
+    */
+    focus_within__bg_pink_500: "focus-within:bg-pink-500",
 
     /**
         display: flex;

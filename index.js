@@ -328,7 +328,7 @@ function getAndFilterParsedClassesWithOpts (root, escapeClassName,
       parsedClassesFromRule.forEach(class_ => {
         if (!usedCssClasses.has(escapeClassName(class_.name))) {
           // just remove the class selector
-          let regex = RegExp(`\\b${ class_.name }\\b`)
+          let regex = RegExp(`\\b${ escapeRegExp(class_.name) }\\b`)
           let selectors = rule.selectors
             .filter(selector => !regex.test(selector))
           if (selectors.length === 0) {
@@ -352,6 +352,10 @@ function getAndFilterParsedClassesWithOpts (root, escapeClassName,
   }
 
   return parsedClasses
+}
+
+function escapeRegExp (string) {
+  return string.replace(/[$()*+.:?[\\\]^{|}]/g, '\\\\$&')
 }
 
 /** Aggregate classes by name

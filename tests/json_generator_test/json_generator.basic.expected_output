@@ -1,5 +1,32 @@
 [
     {
+        "name": "space-y-0",
+        "properties": [
+            {
+                "property": "margin-bottom: calc(0px * var(--tw-space-y-reverse))",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
+        "name": "space-y-0.5",
+        "properties": [
+            {
+                "property": "margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)))",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
+        "name": "focus-within:bg-pink-500",
+        "properties": [
+            {
+                "property": "background-color: rgba(236, 72, 153, var(--tw-bg-opacity))",
+                "mediaQuery": null
+            }
+        ]
+    },
+    {
         "name": "flex",
         "properties": [
             {
