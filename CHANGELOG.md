@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+- Escape class names in RegExp to correctly catch classes with special characters while purging. PR #20
+
 [0.2.3]
 
 - Update escaping function to support Tailwind classes like `2xl:something` (`_2xl__something`) or `something-1.5` (`something_1_p_5`). PR #15
