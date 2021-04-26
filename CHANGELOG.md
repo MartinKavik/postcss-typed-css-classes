@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [UNRELEASED]
 
+[0.2.4]
+
 - Escape class names in RegExp to correctly catch classes with special characters while purging. PR #20
 
 [0.2.3]
