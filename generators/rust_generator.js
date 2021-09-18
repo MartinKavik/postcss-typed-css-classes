@@ -2,12 +2,22 @@ let os = require('os')
 
 const defaults = {
   output_filepath: 'src/css_classes.rs',
-  content: [{
-    path: ['src/**/*.rs'],
-    regex: /C\.[\d_a-z]+/g,
-    mapper: class_ => class_.substring(2),
-    escape: false
-  }]
+  content: [
+    {
+      path: ['src/**/*.rs'],
+      regex: /C\.[\d_a-z]+/g,
+      mapper: class_ => class_.substring(2),
+      escape: false
+    }
+  ],
+  replace: {
+    '-': '_',
+    ':': '__',
+    '/': 'of',
+    '@': '_at_',
+    '\\.': '_p_',
+    '^(?=\\d)': '_'
+  }
 }
 
 module.exports = {
@@ -39,8 +49,8 @@ module.exports = {
 // - fields are &str
 // - see EXAMPLE CODE:
 //     `/tests/rust_generator_test/rust_generator.basic.expected_output`
-function generate (classes) {
-  classes = addEscapedNames(classes)
+function generate (classes, replace) {
+  classes = addEscapedNames(classes, replace)
   return (
     os.EOL +
     generateWarning() +
@@ -69,21 +79,20 @@ function generate (classes) {
         ]
     },
  */
-function addEscapedNames (classes) {
+function addEscapedNames (classes, replace) {
   return classes.map(class_ => {
-    class_.escapedName = escapeClassName(class_.name)
+    class_.escapedName = escapeClassName(class_.name, replace)
     return class_
   })
 }
 
 // Rust doesn't allow to use any string as a field name
-function escapeClassName (name) {
-  name = name.replace(/-/g, '_')
-  name = name.replace(/:/g, '__')
-  name = name.replace(/\//g, 'of')
-  name = name.replace(/@/g, '_at_')
-  name = name.replace(/\./g, '_p_')
-  name = name.replace(/^(?=\d)/g, '_')
+function escapeClassName (name, replace) {
+  for (let [key, value] of Object.entries(replace)) {
+    // eslint-disable-next-line
+    let re = new RegExp(key, "g");
+    name = name.replace(re, value)
+  }
   if (getKeywords().includes(name)) {
     name += '_'
   }
@@ -103,7 +112,9 @@ function generateAttributes () {
 function generateStructDefinition (classes) {
   let lifetime = classes.length ? "<'a>" : ''
   return (
-    'pub struct CssClasses' + lifetime + ' {' +
+    'pub struct CssClasses' +
+    lifetime +
+    ' {' +
     os.EOL +
     classes.map(generateStructDefinitionItem).join('') +
     '}'
@@ -111,12 +122,7 @@ function generateStructDefinition (classes) {
 }
 
 function generateStructDefinitionItem (class_) {
-  return (
-    '    pub ' +
-    class_.escapedName +
-    ": &'a str," +
-    os.EOL
-  )
+  return '    pub ' + class_.escapedName + ": &'a str," + os.EOL
 }
 
 function generateStructInstance (classes) {
