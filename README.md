@@ -146,13 +146,39 @@ _examples_
   })
 ```
 
-* ### filter
+- ### filter
   - a function with one parameter `class_` that will be called when a CSS class is found in your stylesheet
   - optional
   - If a filter function is defined, it takes precedence over any of the content opts that may have been set
   - examples:
     - `function() { return true }`
     - `(class_) => class_ !== "not-this-class"`
+
+- ### replace
+	- object with key:value that is used to replace invalid characters in rust names where key is the regex and value is the replacement
+	- allows adding new regex replacements as well as overriding defaults
+
+_default_
+```js
+{
+    '-': '_',
+    ':': '__',
+    '/': 'of',
+    '@': '_at_',
+    '\\.': '_p_',
+    '^(?=\\d)': '_'
+ }
+```
+
+_example_
+```js
+require("postcss-typed-css-classes")({
+    generator: "rust",
+    replace: {
+		"-":"_d_"
+	}
+  })
+```
 
 ## Contributing - How To Add A New Built-In Generator
 
