@@ -4,16 +4,11 @@
 #[allow(non_snake_case, dead_code)]
 pub struct CssClasses<'a> {
     pub _2xl__test: &'a str,
+
     pub test_2_p_5: &'a str,
 }
 
 pub static C: CssClasses = CssClasses {
-
-    /**
-    */
     _2xl__test: "2xl:test",
-
-    /**
-    */
     test_2_p_5: "test-2.5",
 };

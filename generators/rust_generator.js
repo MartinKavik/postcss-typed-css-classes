@@ -116,13 +116,19 @@ function generateStructDefinition (classes) {
     lifetime +
     ' {' +
     os.EOL +
-    classes.map(generateStructDefinitionItem).join('') +
+    classes.map(generateStructDefinitionItem).join(os.EOL) +
     '}'
   )
 }
 
 function generateStructDefinitionItem (class_) {
-  return '    pub ' + class_.escapedName + ": &'a str," + os.EOL
+  return (
+    generateComment(class_) +
+    '    pub ' +
+    class_.escapedName +
+    ': &\'a str,' +
+    os.EOL
+  )
 }
 
 function generateStructInstance (classes) {
@@ -136,7 +142,6 @@ function generateStructInstance (classes) {
 
 function generateStructInstanceItem (class_) {
   return (
-    generateComment(class_) +
     '    ' +
     class_.escapedName +
     ': "' +
@@ -148,12 +153,7 @@ function generateStructInstanceItem (class_) {
 
 function generateComment (class_) {
   return (
-    os.EOL +
-    '    /**' +
-    os.EOL +
-    [...new Set(class_.properties.map(generateCommentItem))].join('') +
-    '    */' +
-    os.EOL
+    [...new Set(class_.properties.map(generateCommentItem))].join('')
   )
 }
 
@@ -163,7 +163,7 @@ function generateCommentItem (classProperty) {
     mediaQuery = '    ' + classProperty.mediaQuery
   }
   let property = classProperty.property
-  return '        ' + property + ';' + mediaQuery + os.EOL
+  return '    /// ' + property + ';' + mediaQuery + os.EOL
 }
 
 // https://doc.rust-lang.org/book/appendix-01-keywords.html

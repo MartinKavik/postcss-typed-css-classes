@@ -3,83 +3,58 @@
 
 #[allow(non_snake_case, dead_code)]
 pub struct CssClasses<'a> {
+    /// margin-bottom: calc(0px * var(--tw-space-y-reverse));
     pub space_y_0: &'a str,
+
+    /// margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));
     pub space_y_0_p_5: &'a str,
+
+    /// background-color: rgba(236, 72, 153, var(--tw-bg-opacity));
     pub focus_within__bg_pink_500: &'a str,
+
+    /// display: flex;
     pub flex: &'a str,
+
+    /// background-color: #3490dc;
     pub md__hover__bg_blue: &'a str,
+
+    /// margin-left: -1.5rem;
+    /// margin-right: -1.5rem;
     pub _mx_6: &'a str,
+
+    /// position: static;
     pub static_: &'a str,
+
+    /// width: 60%;
     pub w_3of5: &'a str,
+
+    /// max-width: 576px;    @media (min-width: 576px)
+    /// max-width: 768px;    @media (min-width: 768px)
     pub container: &'a str,
+
+    /// width: 100%;    @media (min-width: 1600px)
     pub uk_child_width_1_1_at_xl: &'a str,
+
+    /// font-family: 'Font Awesome 5 Free';
+    /// font-weight: 900;
     pub fa: &'a str,
+
+    /// font-family: 'Font Awesome 5 Free';
+    /// font-weight: 900;
     pub fas: &'a str,
 }
 
 pub static C: CssClasses = CssClasses {
-
-    /**
-        margin-bottom: calc(0px * var(--tw-space-y-reverse));
-    */
     space_y_0: "space-y-0",
-
-    /**
-        margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));
-    */
     space_y_0_p_5: "space-y-0.5",
-
-    /**
-        background-color: rgba(236, 72, 153, var(--tw-bg-opacity));
-    */
     focus_within__bg_pink_500: "focus-within:bg-pink-500",
-
-    /**
-        display: flex;
-    */
     flex: "flex",
-
-    /**
-        background-color: #3490dc;
-    */
     md__hover__bg_blue: "md:hover:bg-blue",
-
-    /**
-        margin-left: -1.5rem;
-        margin-right: -1.5rem;
-    */
     _mx_6: "-mx-6",
-
-    /**
-        position: static;
-    */
     static_: "static",
-
-    /**
-        width: 60%;
-    */
     w_3of5: "w-3/5",
-
-    /**
-        max-width: 576px;    @media (min-width: 576px)
-        max-width: 768px;    @media (min-width: 768px)
-    */
     container: "container",
-
-    /**
-        width: 100%;    @media (min-width: 1600px)
-    */
     uk_child_width_1_1_at_xl: "uk-child-width-1-1@xl",
-
-    /**
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-    */
     fa: "fa",
-
-    /**
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-    */
     fas: "fas",
 };
